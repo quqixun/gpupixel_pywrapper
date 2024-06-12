@@ -1,6 +1,7 @@
 # GPUPixel Python Wrapper
 
 A simple python wrapprer for [gpupixel](https://github.com/pixpark/gpupixel) using SourceRawDataInput and TargetRawDataOutput.
+
 Code in this repository was only tested on Windows 10.
 
 ## 1. Modify and build gpupixel
@@ -28,9 +29,11 @@ git clone git@github.com:quqixun/gpupixel_pywrapper.git
 ```
 
 Modify ```gpupixel\src\target\target_raw_data_output.cc``` according to [issue](https://github.com/pixpark/gpupixel/issues/66#issuecomment-2144263415).
+
 Or you can copy [target_raw_data_output.cc](./src/target/target_raw_data_output.cc) to ```gpupixel\src\target``` to replace the older one.
 
 Copy [stb_image_write.h](./src/third_party/stb/stb_image_write.h) to ```gpupixel\src\third_party\stb``` for writing image in test. 
+
 Find more infomation about [stb](https://github.com/nothings/stb).
 
 ### 1.3 Build gpupixel
@@ -46,7 +49,9 @@ Then, ```libgpupixel.dll``` can be found in ```gpupixel\output\library\windows``
 ## 2. C++ Wrapper (Optional)
 
 [GPUPixelWrapper](./wrapper/windows/gpupixel_wrapper.h) is a C++ encapsulation for gpupixel using SourceRawDataInput and TargetRawDataOutput.
+
 [cli.cc](./wrapper/windows/cli.cc) demonstrates its usage.
+
 Copy [wrapper](./wrapper/) directory to ```gpupixel``` and build it:
 ```bash
 cd gpupixel
@@ -63,6 +68,7 @@ This step is not necessary for building python wrapper.
 ## 3. Python Wrapper
 
 Finally, we just wrap the GPUPixelWrapper in [gpupixel_pywrapper.cc](./pywrapper/windows/gpupixel_pywrapper.cc) and it's ready for python to call.
+
 Copy [pywrapper](./pywrapper/) directory to ```gpupixel``` and build it:
 ```bash
 cd gpupixel
@@ -70,10 +76,13 @@ cmake -G "MinGW Makefiles" -B pywrapper/build -S pywrapper
 cmake --build pywrapper/build --config Debug  # or Release
 ```
 ```libgpupixel_pywrapper.dll``` can be found in ```gpupixel\output\pywrapper\windows```.
+
 Copy [test_pywrapper.py](./test_pywrapper.py) to ```gpupixel\output\pywrapper\windows```, and run ```python test_pywrapper.py``` to check result.
 
 ---
 
 I'm not a C++ developer, the code in this repository was developed with the assistance of ChatGPT.
+
 This may not be the best solution, but it is good enough for my project at the moment.
+
 I am always looking forward to a better one.
