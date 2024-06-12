@@ -18,7 +18,7 @@ Code in this repository was only tested on Windows 10.
 Clone gpupixel:
 ```bash
 git clone --depth 1 --branch v1.2.5 git@github.com:pixpark/gpupixel.git
-# or you try to use the latest code
+# or try to use the latest code
 # git clone git@github.com:pixpark/gpupixel.git
 ```
 
