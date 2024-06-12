@@ -1,6 +1,6 @@
 # GPUPixel Python Wrapper
 
-A simple python wrapprer for [gpupixel](https://github.com/pixpark/gpupixel) using SourceRawDataInput and TargetRawDataOutput.<br/>
+A simple python wrapper for [gpupixel](https://github.com/pixpark/gpupixel) using SourceRawDataInput and TargetRawDataOutput.<br/>
 Code in this repository was only tested on Windows 10.
 
 ## 1. Modify and build gpupixel
