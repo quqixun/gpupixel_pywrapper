@@ -27,6 +27,7 @@ if __name__ == '__main__':
     lib.GPUPixelWrapper_setParameters.argtypes = [ctypes.c_void_p, ctypes.c_float, ctypes.c_float, ctypes.c_float, ctypes.c_float, ctypes.c_float, ctypes.c_float]
     lib.GPUPixelWrapper_run.argtypes = [ctypes.c_void_p, ctypes.POINTER(ctypes.c_uint8), ctypes.c_int, ctypes.c_int, ctypes.c_int]
     lib.GPUPixelWrapper_run.restype = ctypes.POINTER(ctypes.c_uint8)
+    lib.GPUPixelWrapper_destroy.argtypes = [ctypes.POINTER(ctypes.c_uint8)]
     lib.GPUPixelWrapper_release.argtypes = [ctypes.c_void_p]
 
     # create GPUPixelWrapper instance
@@ -50,6 +51,7 @@ if __name__ == '__main__':
         output_data_ptr = lib.GPUPixelWrapper_run(gpu_pixel, input_data.ctypes.data_as(ctypes.POINTER(ctypes.c_uint8)), width, height, channels)
         # convert output pointer to numpy array
         output_data = np.ctypeslib.as_array(output_data_ptr, shape=(height, width, channels))
+        output_result = output_data.copy()
 
         plt.figure(figsize=(9, 7))
         plt.subplot(121)
@@ -58,10 +60,16 @@ if __name__ == '__main__':
         plt.axis('off')
         plt.subplot(122)
         plt.title('Output')
-        plt.imshow(output_data[:, :, :3])
+        plt.imshow(output_result[:, :, :3])
         plt.axis('off')
         plt.tight_layout()
         plt.show()
 
-        # release
-        lib.GPUPixelWrapper_release(gpu_pixel)
+        # destroy output data
+        lib.GPUPixelWrapper_destroy(output_data_ptr)
+
+        try:
+            # try to realse output buffer in gpu_pixel
+            lib.GPUPixelWrapper_release(gpu_pixel)
+        except Exception as e:
+            pass

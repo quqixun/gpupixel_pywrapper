@@ -55,6 +55,7 @@ int main(int argc, char* argv[]) {
     stbi_image_free(inputData);
 
     // release output
+    free(outputBuffer);
     wrapper.release();
 
     return 0;

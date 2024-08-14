@@ -26,4 +26,8 @@ extern "C" {
     void GPUPixelWrapper_release(GPUPixelWrapperPtr self) {
         reinterpret_cast<GPUPixelWrapper*>(self)->release();
     }
+
+    void GPUPixelWrapper_destroy(uint8_t* outputData) {
+        free(outputData);
+    }
 }
